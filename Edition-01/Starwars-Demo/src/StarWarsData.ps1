@@ -4,7 +4,7 @@
 # - www.swapi.tech
 # - swapi.dev
 
-#Requires -Version 7.2
+#Requires -Version 7.0
 
 $swApiUrl = 'https://swapi-deno.azurewebsites.net'
 function Invoke-StarWarsApi
@@ -42,7 +42,7 @@ function Search-SWPerson {
     $results = $response | Where-Object name -like "*$Name*" 
 
     if ($null -eq $results) {
-        Write-Host "No person results found for '$Name'." -f Yellow
+        Write-Output @{ Error = "No person results found for '$Name'."}
     }
     else {
         # return all matches with some properties
@@ -64,7 +64,7 @@ function Search-SWPlanet {
     $results = $response | Where-Object name -like "*$Name*" 
 
     if ($null -eq $results) {
-        Write-Host "No planet results found for '$Name'." -f Yellow
+        Write-Output @{ Error = "No planet results found for '$Name'."}
     }
     else {
         # return all matches with some attributes
@@ -86,7 +86,7 @@ function Search-SWFilm {
     $results = $response | Where-Object title -like "*$Name*" 
 
     if ($null -eq $results) {
-        Write-Host "No film results found for '$Name'." -f Yellow
+        Write-Output @{ Error = "No film results found for '$Name'."}
     }
     else {
         # return all matches with some attributes
@@ -104,18 +104,25 @@ function Get-SWPerson {
     # get the person
     $person = Invoke-StarWarsApi -objectType People -id $Id
 
-    # get the homeworld planet and the films
-    $planet = Invoke-StarWarsApi -objectType Planets -id $person.homeworld
-    $films = Invoke-StarWarsApi -objectType Films
-
-    # build the result object as a mix of all the data returned
-    $result = [PSCustomObject]@{
-        Name = $person.Name
-        BodyType = $person | Select-Object height, mass, gender, 
-                                           skin_color, eye_color
-        HomeWorld = $planet | Select-Object name, population, gravity, terrain
-        Films = $films | Where-Object url -in $person.films | 
-                         Select-Object title, director, release_date
+    if ($null -ne $person.Error)
+    {
+        Write-Output @{ Error = "Unable to find a person record given Id of $Id" }
     }
-    Write-Output $result
+    else {
+        # get the homeworld planet and the films
+        $planet = Invoke-StarWarsApi -objectType Planets -id $person.homeworld
+        $films = Invoke-StarWarsApi -objectType Films
+
+        # build the result object as a mix of all the data returned
+        $result = [PSCustomObject]@{
+            Name = $person.Name
+            BodyType = $person | Select-Object height, mass, gender, 
+                                               skin_color, eye_color
+            HomeWorld = $planet | Select-Object name, population, gravity, terrain
+            Films = $films | Where-Object url -in $person.films | 
+                            Select-Object title, director, release_date
+        }
+        Write-Output $result
+    }
 }
+

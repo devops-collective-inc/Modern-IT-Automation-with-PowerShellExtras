@@ -23,7 +23,7 @@ Describe 'Search-SWPerson' -Tag 'Unit' {
         $result = Search-SWPerson -Name $testName
 
         # Assert
-        $result | Should -BeNullOrEmpty
+        $result.Error | Should -Be "No person results found for '$testName'."
     }
     It 'Returns multiple matches' {
         # Arrange
@@ -58,7 +58,7 @@ Describe 'Search-SWPlanet' -Tag 'Unit' {
         $result = Search-SWPlanet -Name $testName
 
         # Assert
-        $result | Should -BeNullOrEmpty
+        $result.Error | Should -Be "No planet results found for '$testName'."
     }
     It 'Returns multiple matches' {
         # Arrange
