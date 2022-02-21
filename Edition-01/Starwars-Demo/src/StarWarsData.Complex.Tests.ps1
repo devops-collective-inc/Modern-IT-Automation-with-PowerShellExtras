@@ -21,7 +21,8 @@ Describe 'Search-SWFilm' -Tag 'Unit' {
     @{
        name = 'Return'
        year = '1983-05-25'
-       director = 'Richard Marquand' }
+       director = 'Richard Marquand' 
+    }
   ) {
     # Act
     $result = Search-SWFilm -name $name

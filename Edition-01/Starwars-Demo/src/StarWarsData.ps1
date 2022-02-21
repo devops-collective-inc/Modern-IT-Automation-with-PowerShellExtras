@@ -11,7 +11,7 @@ function Invoke-StarWarsApi
 {
     param (
         [Parameter(Mandatory)]
-        [ValidateSet('Planets', 'Films', "People")]
+        [ValidateSet('Planets', 'Films', 'People')]
         [string] $objectType,
 
         [int] $id = -1 
@@ -47,7 +47,7 @@ function Search-SWPerson {
     else {
         # return all matches with some properties
         $personDetails = $results | ForEach-Object { Invoke-StarWarsApi -objectType People -id $_.id }
-        Write-Output $personDetails | Select-Object @{ Name="id"; Expression ={ $_.id} }, 
+        Write-Output $personDetails | Select-Object @{ Name = "id"; Expression = { $_.id} }, 
                                                     name, gender, height, 
                                                     @{ Name = "weight"; Expression = {$_.mass} }
     }
@@ -92,7 +92,7 @@ function Search-SWFilm {
     else {
         # return all matches with some attributes
         $filmDetails = $results | ForEach-Object { Invoke-StarWarsApi -objectType Films -id $_.id }
-        Write-Output $filmDetails | Select-Object @{ Name="id"; Expression = { $_.id} }, 
+        Write-Output $filmDetails | Select-Object @{ Name = "id"; Expression = { $_.id} }, 
                                                   title, director, release_date, 
                                                   characters, planets
     }
@@ -108,7 +108,7 @@ function Get-SWPerson {
 
     if ($null -ne $person.Error)
     {
-        Write-Output @{ Error = "Unable to find a person record given Id of $Id" }
+        Write-Output @{ Error = "Unable to find a person record given Id: $Id" }
     }
     else {
         # get the homeworld planet and the films
@@ -121,11 +121,9 @@ function Get-SWPerson {
         # build the result object as a mix of all the data returned
         $result = [PSCustomObject]@{
             Name = $person.Name
-            BodyType = $person | Select-Object height, mass, gender, 
-                                               skin_color, eye_color
+            BodyType = $person | Select-Object height, mass, gender, skin_color, eye_color
             HomeWorld = $planet | Select-Object name, population, gravity, terrain
-            Films = $filmDetails | Where-Object people -contains $person.id | 
-                                     Select-Object title, director, release_date
+            Films = $filmDetails | Where-Object people -contains $person.id | Select-Object title, director, release_date
         }
         Write-Output $result
     }
