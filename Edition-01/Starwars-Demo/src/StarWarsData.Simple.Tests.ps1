@@ -6,7 +6,7 @@ BeforeAll {
 Describe 'Search-SWPerson' -Tag 'Unit' {
     It 'Returns a single match' {
         # Arrange
-        $testName = 'Bail'
+        $testName = 'Vader'
 
         # Act
         $result = Search-SWPerson -Name $testName

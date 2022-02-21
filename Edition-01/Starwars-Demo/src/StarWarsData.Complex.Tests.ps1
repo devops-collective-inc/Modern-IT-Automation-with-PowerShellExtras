@@ -53,7 +53,7 @@ Describe 'Get-SWPerson' -Tag 'Unit' {
        gender = 'male'
        eyeColour = 'blue'
        homeWorld = 'Tatooine'
-       filmCount = 4 
+       filmCount = 6 
     }
     @{
        name = 'mothma'

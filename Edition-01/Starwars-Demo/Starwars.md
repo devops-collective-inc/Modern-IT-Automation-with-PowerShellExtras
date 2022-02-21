@@ -5,7 +5,8 @@
 This repo contains a sample **PowerShell** script and various **Pester** tests.
 
 The purpose of the repo is to demonstrate Pester usage for both standard and mocked tests.
-The script wraps a Star Wars API site located here: https://swapi-deno.azurewebsites.net
+The script wraps a Star Wars API site located here: https://mc-starwars-data.azurewebsites.net
+This site is hosted in Azure and maintained by Matt Corr.
 
 The repo is uses as the sample for **The AAA Approach** chapter in the **Modern IT Automation with PowerShell** book.
 
@@ -33,4 +34,3 @@ The repo is uses as the sample for **The AAA Approach** chapter in the **Modern 
 ```
 - Users can tweak the `Invoke-Pester` command parameters _(i.e. filter on tags or just run one Test file)_ or use the UI in Visual Studio Code to run the tests.
 
-**NOTE:** If this is the first time the back end API is triggered in a while, it may take a while for the initial request to respond as the website is warmed up.
