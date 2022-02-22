@@ -106,7 +106,7 @@ function Get-SWPerson {
     # get the person
     $person = Invoke-StarWarsApi -objectType People -id $Id
 
-    if ($null -ne $person.Error)
+    if ($null -eq $person)
     {
         Write-Output @{ Error = "Unable to find a person record given Id: $Id" }
     }
