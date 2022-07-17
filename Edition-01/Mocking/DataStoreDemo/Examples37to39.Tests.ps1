@@ -2,9 +2,9 @@ BeforeAll {
     . (Join-Path (Split-Path $PSCommandPath) 'DataStoreFunctions.ps1')
 }
 
-Describe "Parameter validation and typecasting in mocks" {
+Describe 'Parameter validation and typecasting in mocks' {
 
-    It "Mock calls with invalid parameters throw errors" {
+    It 'Mock calls with invalid parameters throw errors' {
 
         Mock Set-DataStore {
             # Does nothing
@@ -22,15 +22,15 @@ Describe "Parameter validation and typecasting in mocks" {
 
 }
 
-Describe "Removing parameter validation and typecasting" {
+Describe 'Removing parameter validation and typecasting' {
 
     BeforeAll {
         Mock Set-DataStore {
             # Does nothing
-        } -RemoveParameterValidation Update -RemoveParameterType Update,Data
+        } -RemoveParameterValidation Update -RemoveParameterType Update, Data
     }
 
-    It "Succeeds when validation and typecasting are removed" {
+    It 'Succeeds when validation and typecasting are removed' {
 
         Set-DataStore -Name 'AName' -Data '' -Update ''
 
@@ -38,7 +38,7 @@ Describe "Removing parameter validation and typecasting" {
 
     }
 
-    It "Null values always fail for mandatory parameters" {
+    It 'Null values always fail for mandatory parameters' {
 
         # Name wasn't included in -RemoveParameterValidation
         # or -RemoveParameterType

@@ -1,5 +1,9 @@
 BeforeDiscovery {
-    Get-Module -Name DataStoreFunctions -ea:si | Remove-Module
+    $GetModuleParams = @{
+        Name        = 'DataStoreFunctions'
+        ErrorAction = 'SilentlyContinue'
+    }
+    Get-Module @GetModuleParams | Remove-Module
     New-Module -Name DataStoreFunctions -ScriptBlock {
         # Load functions
         . (Join-Path (Split-Path $PSCommandPath) 'DataStoreFunctions.ps1')
@@ -58,13 +62,13 @@ Describe 'Mocking in modules' {
     It 'Mock assertions should work in the correct scope' {
         Mock Get-DataStoreFile {} -ModuleName DataStoreFunctions -Verifiable
         Get-DataStore -Name SomeName
-    
+
         Should -Invoke Get-DataStoreFile -ModuleName DataStoreFunctions -Exactly 1
-    
+
         InModuleScope DataStoreFunctions {
             Should -Invoke Get-DataStoreFile -Exactly 1
         }
-    
+
         Should -InvokeVerifiable
     }
 

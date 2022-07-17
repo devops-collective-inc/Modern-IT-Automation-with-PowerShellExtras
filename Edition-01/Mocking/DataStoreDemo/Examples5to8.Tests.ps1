@@ -3,7 +3,7 @@ BeforeAll {
 
 }
 
-Describe "Should -Invoke tests" {
+Describe 'Should -Invoke tests' {
 
     BeforeAll {
         # Mock must be placed in a BeforeAll/BeforeEach block
@@ -17,9 +17,9 @@ Describe "Should -Invoke tests" {
         } -Verifiable
     }
 
-    It "Calls Get-DataStore five times" {
+    It 'Calls Get-DataStore five times' {
         for ($i = 0; $i -lt 5; $i++) {
-            Get-DataStore -Name "SomeName"
+            Get-DataStore -Name 'SomeName'
         }
         # At least once
         Should -Invoke 'Get-DataStore'
@@ -37,36 +37,36 @@ Describe "Should -Invoke tests" {
         Should -Not -Invoke 'Get-DataStore' -Exactly 4
     }
 
-    Context "Scope tests" {
+    Context 'Scope tests' {
 
         # Example 6a:
-        It "Calls Get-DataStore exactly once in the It block" {
-            Get-DataStore -Name "SomeOtherName"
+        It 'Calls Get-DataStore exactly once in the It block' {
+            Get-DataStore -Name 'SomeOtherName'
             Should -Invoke 'Get-DataStore' -Exactly 1 -Scope It
             # Same as above since It is the 0th parent (this block)
             Should -Invoke 'Get-DataStore' -Exactly 1 -Scope 0
         }
 
-        Context "An inner scope" {
+        Context 'An inner scope' {
 
             # Example 6b:
-            It "Calls Get-DataStore once in the current Context block" {
-                Get-DataStore -Name "SomeOtherName"
+            It 'Calls Get-DataStore once in the current Context block' {
+                Get-DataStore -Name 'SomeOtherName'
                 Should -Invoke 'Get-DataStore' -Exactly 1 -Scope Context
                 # Same as above since Context is the 1st parent
                 Should -Invoke 'Get-DataStore' -Exactly 1 -Scope 1
             }
 
             # Example 6c:
-            It "Fails to target outer Context block" {
+            It 'Fails to target outer Context block' {
                 # THIS TEST FAILS since the innermost Context block is selected
                 Should -Invoke 'Get-DataStore' -Exactly 2 -Scope Context
             }
-            It "Calls Get-DataStore twice in outer Context block" {
+            It 'Calls Get-DataStore twice in outer Context block' {
                 # The 2nd parent of this It block is the outer Context block
                 Should -Invoke 'Get-DataStore' -Exactly 2 -Scope 2
             }
-            It "Calls Get-DataStore seven times in outer Describe block" {
+            It 'Calls Get-DataStore seven times in outer Describe block' {
                 Should -Invoke 'Get-DataStore' -Exactly 7 -Scope Describe
                 # The 3nd parent of this It block is the Describe block
                 Should -Invoke 'Get-DataStore' -Exactly 7 -Scope 3
@@ -74,7 +74,7 @@ Describe "Should -Invoke tests" {
 
         }
 
-        It "Calls all verifiable mocks at least once" {
+        It 'Calls all verifiable mocks at least once' {
             Should -InvokeVerifiable
         }
 

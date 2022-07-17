@@ -2,7 +2,7 @@ BeforeAll {
     . (Join-Path (Split-Path $PSCommandPath) 'DataStoreFunctions.ps1')
 }
 
-Describe "Data store test" {
+Describe 'Data store test' {
 
     BeforeAll {
         # Mock must be placed in a BeforeAll/BeforeEach block
