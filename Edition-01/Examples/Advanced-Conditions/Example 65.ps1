@@ -1,0 +1,1 @@
+$var = 'Value' -eq 'Value'

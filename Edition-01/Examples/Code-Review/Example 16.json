@@ -1,0 +1,100 @@
+{
+    // Recommends that PowerShell extension is installed if missing.
+    "recommendations": [
+        "ms-vscode.powershell"
+    ],
+
+    // Number of spaces for tab stops.
+    // Default: 4
+    "editor.tabSize": 4,
+
+    // Uses spaces instead of horizontal tabs.
+    // Default: true
+    "editor.insertSpaces": true,
+
+    // Trims trailing spaces when you save a file.
+    // Default: false
+    "files.trimTrailingWhitespace": true,
+
+    // Adds a space before and after the pipeline operator ('|') if missing.
+    // Default: True
+    "powershell.codeFormatting.addWhitespaceAroundPipe": true,
+
+    // Aligns assignment statements in a hash table or a DSC Configuration.
+    // Default: True
+    "powershell.codeFormatting.alignPropertyValuePairs": true,
+
+    // Replaces aliases with their aliased name.
+    // Default: False
+    "powershell.codeFormatting.autoCorrectAliases": true,
+
+    // Doesn't reformat one-line code blocks, such as:
+    //  "if (...) {...} else {...}".
+    // Default: True
+    "powershell.codeFormatting.ignoreOneLineBlock": false,
+
+    // Adds a newline (line break) after a closing brace.
+    // Default: True
+    "powershell.codeFormatting.newLineAfterCloseBrace": true,
+
+    // Adds a newline (line break) after an open brace.
+    // Default: True
+    "powershell.codeFormatting.newLineAfterOpenBrace": true,
+
+    // Places open brace on the same line as its associated statement.
+    // Default: True
+    "powershell.codeFormatting.openBraceOnSameLine": true,
+
+    // Multi-line pipeline style settings.
+    // Default: NoIndentation
+    "powershell.codeFormatting.pipelineIndentationStyle": "NoIndentation",
+
+    // Sets the code formatting options to follow the given indent style
+    //  in a way that's compatible with PowerShell Syntax.
+    // Default: Custom
+    "powershell.codeFormatting.preset": "OTBS",
+
+    // Trims extraneous spaces (more than 1 space character) before and
+    //  after the pipeline operator ('|').
+    // Default: False
+    "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
+
+    // Use single quotes if a string is not interpolated
+    //  and its value does not contain a single quote.
+    // Default: False
+    "powershell.codeFormatting.useConstantStrings": true,
+
+    // Use correct casing for cmdlets.
+    // Default: False
+    "powershell.codeFormatting.useCorrectCasing": true,
+
+    // Adds a space after a separator (',' and ';').
+    // Default: True
+    "powershell.codeFormatting.whitespaceAfterSeparator": true,
+
+    // Adds spaces before and after an operator ('=', '+', '-', etc.).
+    // Default: True
+    "powershell.codeFormatting.whitespaceAroundOperator": true,
+
+    // Adds a space between a keyword and its associated opening brace.
+    // Default: True
+    "powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+
+    // Adds a space between a keyword (if, elseif, while, switch, etc.)
+    //  and its associated conditional expression.
+    // Default: True
+    "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+
+    // Removes redundant spaces between parameters.
+    // Default: False
+    "powershell.codeFormatting.whitespaceBetweenParameters": true,
+
+    // Adds a space after an opening brace ('{')
+    //  and before a closing brace ('}').
+    // Default: True
+    "powershell.codeFormatting.whitespaceInsideBrace": true,
+
+    // Enables real-time script analysis from PowerShell Script Analyzer.
+    // Default: True
+    "powershell.scriptAnalysis.enable": true
+}
