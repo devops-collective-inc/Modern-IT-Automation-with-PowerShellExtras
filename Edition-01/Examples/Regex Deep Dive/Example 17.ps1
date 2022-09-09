@@ -1,0 +1,1 @@
+'Nice!' -replace 'ice', 'oice $&'

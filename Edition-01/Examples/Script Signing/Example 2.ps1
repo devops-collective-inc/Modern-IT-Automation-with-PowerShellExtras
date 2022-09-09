@@ -1,0 +1,1 @@
+New-SelfSignedCertificate -Type CodeSigningCert -Subject MySelfCodeSigningCert

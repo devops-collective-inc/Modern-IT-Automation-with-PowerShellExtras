@@ -1,0 +1,1 @@
+Get-CAAuthorityInformationAccess | Format-List
