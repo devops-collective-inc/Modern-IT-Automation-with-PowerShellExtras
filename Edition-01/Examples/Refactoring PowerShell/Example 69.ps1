@@ -1,0 +1,2 @@
+$XMLString = $XMLObject.OuterXml
+$XMLString

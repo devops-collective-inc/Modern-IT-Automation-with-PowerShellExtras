@@ -1,0 +1,5 @@
+$MyHashtable = @{
+    Name        = ''
+    Description = ''
+    Usage       = ''
+}

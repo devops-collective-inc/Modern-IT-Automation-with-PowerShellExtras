@@ -1,0 +1,1 @@
+Get-CACrlDistributionPoint | Format-List

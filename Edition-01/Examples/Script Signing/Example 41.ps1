@@ -1,0 +1,1 @@
+Get-PendingRequest -CertificationAuthority $CA

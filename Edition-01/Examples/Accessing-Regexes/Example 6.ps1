@@ -1,0 +1,1 @@
+-split 'Red     Green Blue'
