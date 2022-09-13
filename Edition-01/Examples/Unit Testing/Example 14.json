@@ -1,0 +1,35 @@
+- name: Perform all Pester Unit Tests from the Scripts folder
+  shell: pwsh
+  run: |
+    $Config = New-PesterConfiguration
+    $Config.Run.Path = 'scripts/*.Tests.ps1'
+    $Config.Filter.Tag = 'Unit'
+    $Config.Output.Verbosity = 'Detailed'
+    $Config.Run.PassThru = $true
+    $Result = Invoke-Pester -Configuration $Config
+    if ($null -eq $Result) { exit 1 }
+    $sb = [System.Text.StringBuilder]::new()
+    $sb.AppendLine('# Pester Test results')
+    $sb.AppendLine('## Summary')
+    $sb.AppendLine('|Item|Result|')
+    $sb.AppendLine('|----|----|')
+    $sb.AppendLine("|**Pester Version**|$($Result.Version)|")
+    $sb.AppendLine("|**PowerShell Version**|$($Result.PSVersion)|")
+    $sb.AppendLine("|**Executed At**|$($Result.ExecutedAt)|")
+    $sb.AppendLine("|**Overall Result**|$($Result.Result)|")
+    $sb.AppendLine("|**Total**|$($Result.TotalCount)|")
+    $sb.AppendLine("|**Passed**|$($Result.PassedCount)|")
+    $sb.AppendLine("|**Failed**|$($Result.FailedCount)|")
+    $sb.AppendLine("|**Skipped**|$($Result.SkippedCount)|")
+    $sb.AppendLine("|**Not Run**|$($Result.NotRunCount)|")
+    $sb.AppendLine()
+    $sb.AppendLine('## Details')
+    $sb.AppendLine('|Test Name|Skip|Duration (secs)|Result|')
+    $sb.AppendLine('----|----|----|----|')
+    $Result.Tests | ForEach-Object {
+      $sb.AppendLine(
+        "|$($_.ExpandedName)|$($_.Skip)|" +
+        "$($_.Duration.ToString('ss\.fff'))|$($_.Result)|"
+      )
+    }
+    $sb.ToString() | Out-File -Path $ENV:GITHUB_STEP_SUMMARY

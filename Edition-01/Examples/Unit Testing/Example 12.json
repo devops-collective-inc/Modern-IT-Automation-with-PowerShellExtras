@@ -1,0 +1,26 @@
+name: PesterTests
+trigger: none
+jobs:
+  # Runs Pester tests on the PowerShell Script in the scripts folder
+  - job: RunPesterTests
+    displayName: "Run Pester Tests"
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - pwsh: |
+          $Config = New-PesterConfiguration
+          $Config.Run.Path = 'scripts/*.Tests.ps1'
+          $Config.Filter.Tag = 'Unit'
+          $Config.TestResult.OutputPath = 'Test-Pester.xml'
+          $Config.TestResult.Enabled = $true
+          Invoke-Pester -Configuration $Config
+        displayName: "Invoke Pester"
+        failOnStderr: false
+
+      - task: PublishTestResults@2
+        displayName: "Publish Test Results"
+        inputs:
+          testResultsFormat: "NUnit"
+          testResultsFiles: "**/Test-Pester.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
