@@ -1,0 +1,33 @@
+name: Test PowerShell Scripts
+on:
+  workflow_dispatch:
+  pull_request:
+jobs:
+  run-pester-tests:
+    name: Run Pester tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Perform all Pester Unit Tests from the Scripts folder
+        shell: pwsh
+        run: |
+          $Config = New-PesterConfiguration
+          $Config.Run.Path = 'scripts/*.Tests.ps1'
+          $Config.Filter.Tag = 'Unit'
+          $Config.TestResult.OutputPath = 'Test-Pester.xml'
+          $Config.TestResult.Enabled = $true
+          $Config.Run.PassThru = $true
+          $Result = Invoke-Pester -Configuration $Config
+          if ($null -eq $Result) { exit 1 }
+          '::notice title=Results::',
+          "Total: $($Result.TotalCount), ",
+          "Passed: $($Result.PassedCount), ",
+          "Failed: $($Result.FailedCount), ",
+          "Skipped: $($Result.SkippedCount)" -join ''
+      - name: Publish Test Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results
+          path: "**/Test-Pester.xml"
