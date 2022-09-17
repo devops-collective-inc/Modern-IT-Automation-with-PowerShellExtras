@@ -2,6 +2,9 @@
 $Params = @{
     Parameter1 = 'Value'
 }
+
+$Condition = $true
+
 # The Logic can be applied now:
 # Either add the key 'Parameter2' or 'Parameter3' to the Hashtable.
 if ($Condition) { $Params.Parameter2 = 'Value2' }

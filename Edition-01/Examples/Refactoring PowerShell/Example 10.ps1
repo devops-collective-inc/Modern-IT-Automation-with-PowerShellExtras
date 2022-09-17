@@ -1,8 +1,8 @@
 #
 # Top Level Object used in the examples
 $obj = [PSCustomObject]@{
-    Property       = "string inside a property!"
-    SecondProperty = ' another string!'
+    Property       = 'string inside a property!'
+    SecondProperty = 'another string!'
     ThirdProperty  = 'And another!'
 }
 #
@@ -14,7 +14,7 @@ $obj = [PSCustomObject]@{
 # Example 2: Refactor the initial interpolation.
 
 # We can use the join operator to join the three strings together and then
-# insert it into the output string. Note the complexity.
+# insert it into the output string. Note the complexity. It's not preferred.
 $string = $($obj.Property), $($obj.SecondProperty),
           $($obj.ThirdProperty) -join ' '
 "This is the initial $string"
