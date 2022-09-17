@@ -1,3 +1,6 @@
+
+$Condition2 = $true
+
 # Parameter1 is the Common Value; set it initially.
 $Params = @{
     Parameter1 = 'Value'

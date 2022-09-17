@@ -4,7 +4,8 @@ function Do-Something {
         '{0} = {1}' -f $_, $PSBoundParameters[$_]
     }
 }
-$Condition2 = $true
+
+$Condition = $true
 
 if ($Condition) {
     Do-Something -Parameter1 'Value' -Parameter2 'Value2'

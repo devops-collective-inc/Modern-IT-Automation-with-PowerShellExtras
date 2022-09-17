@@ -1,3 +1,6 @@
+
+$Condition = $true
+
 if ($Condition) {
     Do-Something -Parameter1 'Value' -Parameter2 'Value2'
 }

@@ -12,7 +12,7 @@ function Invoke-Something {
             Write-Host 'Second'
             $_ -ne 'Z:\Temp'
         })]
-        # Thrid Script Block
+        # Third Script Block
         [ValidateScript({
             Write-Host 'Third'
             Test-Path -Path $_ -IsValid
