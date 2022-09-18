@@ -3,7 +3,7 @@ $Params = @{
     Parameter1 = 'Value'
 }
 
-$Condition = $true
+$Condition2 = $true
 
 # The Logic can be applied now:
 # Either add the key 'Parameter2' or 'Parameter3' to the Hashtable.

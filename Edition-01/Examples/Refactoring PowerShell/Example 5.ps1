@@ -5,7 +5,7 @@ function Do-Something {
     }
 }
 
-$Condition = $true
+$Condition2 = $true
 
 if ($Condition) {
     Do-Something -Parameter1 'Value' -Parameter2 'Value2'
